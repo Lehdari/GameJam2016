@@ -1,13 +1,20 @@
 #include <SFML/Graphics.hpp>
+#include <GL/glew.h>
 
-#include "Sprite.hpp"
+#include "Renderer.hpp"
+#include "Shader.hpp"
 
 
 int main(void) {
     // Declare and create a new window
-    sf::Window window(sf::VideoMode(800, 600), "");
+    sf::Window window(sf::VideoMode(800, 600), "A Game");
     // Limit the framerate to 60 frames per second (this step is optional)
     window.setFramerateLimit(60);
+
+    glewInit();
+
+    Renderer renderer;
+    Shader shader("shaders/VS_Sprite.glsl", "shaders/FS_Sprite.glsl");
 
     // The main loop - ends as soon as the window is closed
     while (window.isOpen()) {
@@ -21,6 +28,9 @@ int main(void) {
         // Activate the window for OpenGL rendering
         window.setActive();
         // OpenGL drawing commands go here...
+
+        renderer.render(shader);
+
         // End the current frame and display its contents on screen
         window.display();
     }
