@@ -13,6 +13,9 @@ int main(void) {
 
     glewInit();
 
+    //kommentti
+    //toinen
+
     Renderer renderer(1024);
 
     sf::Image img;
