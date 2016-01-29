@@ -10,6 +10,8 @@
 
 class Sprite {
 public:
+    friend class Renderer;
+
     Sprite(const Vector2Glf& position,
            const Vector2Glf& scale = Vector2Glf(1.0f, 1.0f),
            float rotation = 0.0f);
