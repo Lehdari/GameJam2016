@@ -13,7 +13,16 @@ int main(void) {
 
     glewInit();
 
-    Renderer renderer;
+    Renderer renderer(1024);
+
+    sf::Image img;
+    img.loadFromFile("res/textures/test.png");
+    Texture tex;
+    tex.loadFromImage(img);
+
+    Sprite& spr = renderer.getReference();
+    spr.setTexture(&tex);
+
     Shader shader("shaders/VS_Sprite.glsl", "shaders/FS_Sprite.glsl");
 
     // The main loop - ends as soon as the window is closed

@@ -3,8 +3,9 @@
 
 
 #include "Texture.hpp"
-#include "Quad.hpp"
 #include "MathTypes.hpp"
+
+#include <memory>
 
 
 class Sprite {
@@ -13,8 +14,11 @@ public:
            const Vector2Glf& scale = Vector2Glf(1.0f, 1.0f),
            float rotation = 0.0f);
 
+    void setTexture(Texture* texture);
+
 private:
-    static Quad quad__;
+    Texture* texture_;
+    GLuint textureId_;
 
     Vector2Glf position_;
     Vector2Glf scale_;
