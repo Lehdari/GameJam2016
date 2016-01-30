@@ -7,6 +7,8 @@
 
 class Light {
 public:
+    friend class Renderer;
+
     Light(const Vector2f& position);
 
 private:

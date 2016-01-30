@@ -2,18 +2,28 @@
 
 
 Renderer::Renderer(unsigned nSprites, unsigned nLights) :
-    sprites_(nSprites, std::make_pair(Vector2Glf(0.0f, 0.0f), false))
+    sprites_(nSprites, std::make_pair(Sprite(Sprite::TYPE_NORMAL, {0.0f, 0.0f}), false)),
+    lights_(nLights, std::make_pair(Vector2Glf(0.0f, 0.0f), false))
 {}
 
 Sprite& Renderer::getSpriteReference(void) {
     for (auto& s : sprites_) {
         if (!s.second) {
             s.second = true;
-            auto& p = s.first;
-            return p;
+            return s.first;
         }
     }
-    throw "Not enough memory allocated in renderer";
+    throw "Not enough sprite memory allocated in renderer";
+}
+
+Light& Renderer::getLightReference(void) {
+    for (auto& l : lights_) {
+        if (!l.second) {
+            l.second = true;
+            return l.first;
+        }
+    }
+    throw "Not enough light memory allocated in renderer";
 }
 
 void Renderer::render(const ViewPort& viewPort, const Shader& shader) const {

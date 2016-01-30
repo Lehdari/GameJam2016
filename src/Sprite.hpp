@@ -18,11 +18,13 @@ public:
         TYPE_LIGHT      //  used as a light sprite
     };
 
-    Sprite(const Vector2Glf& position,
+    Sprite(Type type,
+           const Vector2Glf& position,
            const Vector2Glf& scale = Vector2Glf(1.0f, 1.0f),
            float rotation = 0.0f);
 
     void setTexture(Texture* texture);
+    void setType(Type type);
     void setPosition(const Vector2Glf& position);
     void setScale(const Vector2Glf& scale);
     void setRotation(float rotation);
@@ -33,6 +35,7 @@ private:
     Texture* texture_;
     GLuint textureId_;
 
+    Type type_;
     Vector2Glf position_;
     Vector2Glf scale_;
     float rotation_;

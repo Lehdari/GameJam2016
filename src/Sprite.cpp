@@ -1,14 +1,20 @@
 #include "Sprite.hpp"
 
 
-Sprite::Sprite(const Vector2Glf& position,
+Sprite::Sprite(Type type,
+               const Vector2Glf& position,
                const Vector2Glf& scale,
                float rotation) :
-    texture_(nullptr), textureId_(0)
+    texture_(nullptr), textureId_(0),
+    type_(type)
 {
     setPosition(position);
     setScale(scale);
     setRotation(rotation);
+}
+
+void Sprite::setType(Type type) {
+    type_ = type;
 }
 
 void Sprite::setTexture(Texture* texture) {
