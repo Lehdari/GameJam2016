@@ -1,18 +1,21 @@
 #ifndef EVENTQUEUE_HPP
 #define EVENTQUEUE_HPP
 
-
-#include <deque>
-
+#include <queue>
+#include <map> // questionable, may be useful only with lots of events
+#include "Event.hpp"
 
 class EventQueue {
 public:
-    EventQueue(void);
+	EventQueue() {};
 
-    void unsubscribeEvents(GameObject* gameObject);
+	void subscribeObject(GameObject*, Event::Type);
+    void unsubscribeObject(GameObject*); // total unsubscription
 
+	void dispenseEvents(size_t number = 0);
 private:
-    //std::deque<Event> event_;
+    std::queue<Event> events_;
+	std::map<Event::Type, std::vector<GameObject*>> subscriptions_;
 };
 
 

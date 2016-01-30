@@ -7,9 +7,9 @@ GameObject::GameObject(void) :
 
 GameObject::~GameObject(void) {
     if (eventQueue_)
-        eventQueue_->unsubscribeEvents(this);
+        eventQueue_->unsubscribeObject(this);
 }
 
-void GameObject::subscribeEvents(EventQueue* eventQueue/*, Event::Type type*/) {
-    eventQueue_ = eventQueue;
+void GameObject::putEvent(Event event) {
+	receivedEvents_.push(std::move(event));
 }

@@ -1,11 +1,14 @@
 #ifndef EVENT_HPP
 #define EVENT_HPP
 
+class GameObject;
 
-class Event {
-public:
+struct Event {
+	enum Type { Collision } type;
 
-private:
+	union {
+		struct { GameObject *a, *b; } collisionData;
+	};
 };
 
 
