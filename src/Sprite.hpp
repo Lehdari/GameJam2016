@@ -17,6 +17,11 @@ public:
            float rotation = 0.0f);
 
     void setTexture(Texture* texture);
+    void setPosition(const Vector2Glf& position);
+    void setScale(const Vector2Glf& scale);
+    void setRotation(float rotation);
+
+    const Matrix4Glf& getMatrix(void) const;
 
 private:
     Texture* texture_;
@@ -25,6 +30,13 @@ private:
     Vector2Glf position_;
     Vector2Glf scale_;
     float rotation_;
+
+    Matrix4Glf positionMatrix_;
+    Matrix4Glf scaleMatrix_;
+    Matrix4Glf rotationMatrix_;
+    Matrix4Glf matrix_;
+
+    void updateMatrix(void);
 };
 
 

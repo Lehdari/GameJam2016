@@ -3,18 +3,16 @@
 
 #include "Renderer.hpp"
 #include "Shader.hpp"
+#include "ViewPort.hpp"
 
 
 int main(void) {
     // Declare and create a new window
-    sf::Window window(sf::VideoMode(800, 600), "A Game");
+    sf::Window window(sf::VideoMode(1280, 720), "A Game");
     // Limit the framerate to 60 frames per second (this step is optional)
     window.setFramerateLimit(60);
 
     glewInit();
-
-    //kommentti
-    //toinen
 
     Renderer renderer(1024);
 
@@ -28,6 +26,11 @@ int main(void) {
 
     Shader shader("shaders/VS_Sprite.glsl", "shaders/FS_Sprite.glsl");
 
+    ViewPort viewPort(1280.0f, 720.0f, Vector2Glf(0.0f, 0.0f));
+    viewPort.setPosition({ 640.0f, 0.0f });
+
+    float t = 0.0f;
+
     // The main loop - ends as soon as the window is closed
     while (window.isOpen()) {
         // Event processing
@@ -38,13 +41,18 @@ int main(void) {
                 window.close();
         }
         // Activate the window for OpenGL rendering
-        window.setActive();
-        // OpenGL drawing commands go here...
+        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-        renderer.render(shader);
+        renderer.render(viewPort, shader);
+
+        //viewPort.setPosition( { cos(t*PI*1.15)*200.0f, sin(t*PI*1.15)*200.0f } );
+        spr.setScale( { cos(t*PI*0.25)+1.5f, cos(t*PI*0.15)+1.5 } );
+        spr.setRotation(-t*PI*0.45);
 
         // End the current frame and display its contents on screen
         window.display();
+
+        t += 1.0f/60.0f;
     }
 
     return 0;

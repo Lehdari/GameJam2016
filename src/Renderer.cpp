@@ -16,7 +16,7 @@ Sprite& Renderer::getReference(void) {
     throw "Not enough memory allocated in renderer";
 }
 
-void Renderer::render(const Shader& shader) const {
+void Renderer::render(const ViewPort& viewPort, const Shader& shader) const {
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, quad__.vertexBufferId_);
 
@@ -29,9 +29,8 @@ void Renderer::render(const Shader& shader) const {
         (void*)0            // array buffer offset
     );
 
-    shader.useShader(Matrix4Glf::Identity());
+    shader.useShader(viewPort.getMatrix() * sprites_[0].first.getMatrix());
     glBindTexture(GL_TEXTURE_2D, sprites_[0].first.textureId_);
-    printf("textureId: %u\n", sprites_[0].second);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
     glDisableVertexAttribArray(0);

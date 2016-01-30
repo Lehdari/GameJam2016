@@ -5,6 +5,7 @@
 #include "Sprite.hpp"
 #include "Quad.hpp"
 #include "Shader.hpp"
+#include "ViewPort.hpp"
 
 #include <vector>
 
@@ -16,7 +17,7 @@ public:
     //  finds next free sprite slot
     Sprite& getReference(void);
 
-    void render(const Shader& shader) const;
+    void render(const ViewPort& viewPort, const Shader& shader) const;
 
 private:
     Quad quad__;

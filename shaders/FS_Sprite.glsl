@@ -1,13 +1,12 @@
 #version 330 core
 
 varying vec4 pos;
-varying vec4 norm;
-varying vec3 col;
+varying vec2 uv;
 
 out vec4 color;
 
 uniform sampler2D texture;
 
 void main() {
-    color = texture2D(texture, pos.xy);
+    color = texture2D(texture, uv);
 }
