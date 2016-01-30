@@ -12,6 +12,12 @@ class Sprite {
 public:
     friend class Renderer;
 
+    enum Type {
+        TYPE_NORMAL,
+        TYPE_SOLID,     //  casts a shadow
+        TYPE_LIGHT      //  used as a light sprite
+    };
+
     Sprite(const Vector2Glf& position,
            const Vector2Glf& scale = Vector2Glf(1.0f, 1.0f),
            float rotation = 0.0f);

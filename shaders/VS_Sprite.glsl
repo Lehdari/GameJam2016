@@ -9,6 +9,6 @@ uniform mat4 MVP;
 
 void main() {
     pos = MVP * vec4(position, 1.0);
-    uv = position.xy*0.5 + 1.0;
+    uv = position.xy + 0.5;
     gl_Position = pos;
 }

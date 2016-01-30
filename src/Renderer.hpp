@@ -3,6 +3,7 @@
 
 
 #include "Sprite.hpp"
+#include "Light.hpp"
 #include "Quad.hpp"
 #include "Shader.hpp"
 #include "ViewPort.hpp"
@@ -12,16 +13,20 @@
 
 class Renderer {
 public:
-    Renderer(unsigned poolSize);
+    Renderer(unsigned nSprites, unsigned nLights);
 
     //  finds next free sprite slot
-    Sprite& getReference(void);
+    Sprite& getSpriteReference(void);
+    Light&  getLightReference(void);
 
     void render(const ViewPort& viewPort, const Shader& shader) const;
 
 private:
     Quad quad__;
+
     std::vector<std::pair<Sprite, bool>> sprites_;
+    std::vector<std::pair<Light, bool>> lights_;
+
     GLuint uniformLoc_Texture_;
 };
 

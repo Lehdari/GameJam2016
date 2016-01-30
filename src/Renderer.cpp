@@ -1,11 +1,11 @@
 #include "Renderer.hpp"
 
 
-Renderer::Renderer(unsigned poolSize) :
-    sprites_(poolSize, std::make_pair(Vector2Glf(0.0f, 0.0f), false))
+Renderer::Renderer(unsigned nSprites, unsigned nLights) :
+    sprites_(nSprites, std::make_pair(Vector2Glf(0.0f, 0.0f), false))
 {}
 
-Sprite& Renderer::getReference(void) {
+Sprite& Renderer::getSpriteReference(void) {
     for (auto& s : sprites_) {
         if (!s.second) {
             s.second = true;
@@ -29,13 +29,11 @@ void Renderer::render(const ViewPort& viewPort, const Shader& shader) const {
         (void*)0            // array buffer offset
     );
 
-    shader.useShader(viewPort.getMatrix() * sprites_[0].first.getMatrix());
-    glBindTexture(GL_TEXTURE_2D, sprites_[0].first.textureId_);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    for (auto& s : sprites_) {
+        shader.useShader(viewPort.getMatrix() * s.first.getMatrix());
+        glBindTexture(GL_TEXTURE_2D, s.first.textureId_);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+    }
 
     glDisableVertexAttribArray(0);
-
-    /*for (auto& s : sprites_) {
-
-    }*/
 }

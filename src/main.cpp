@@ -14,20 +14,23 @@ int main(void) {
 
     glewInit();
 
-    Renderer renderer(1024);
+    Renderer renderer(2048, 512);
 
     sf::Image img;
     img.loadFromFile("res/textures/test.png");
     Texture tex;
     tex.loadFromImage(img);
 
-    Sprite& spr = renderer.getReference();
-    spr.setTexture(&tex);
+    for (auto i=0; i<10; ++i) {
+        Sprite& spr = renderer.getSpriteReference();
+        spr.setTexture(&tex);
+        spr.setPosition({ 128.0f*i, 0.0f });
+    }
 
     Shader shader("shaders/VS_Sprite.glsl", "shaders/FS_Sprite.glsl");
 
     ViewPort viewPort(1280.0f, 720.0f, Vector2Glf(0.0f, 0.0f));
-    viewPort.setPosition({ 640.0f, 0.0f });
+    viewPort.setPosition({ -640.0f, 0.0f });
 
     float t = 0.0f;
 
@@ -46,8 +49,8 @@ int main(void) {
         renderer.render(viewPort, shader);
 
         //viewPort.setPosition( { cos(t*PI*1.15)*200.0f, sin(t*PI*1.15)*200.0f } );
-        spr.setScale( { cos(t*PI*0.25)+1.5f, cos(t*PI*0.15)+1.5 } );
-        spr.setRotation(-t*PI*0.45);
+        //spr.setScale( { cos(t*PI*0.25)+1.5f, cos(t*PI*0.15)+1.5 } );
+        //spr.setRotation(-t*PI*0.45);
 
         // End the current frame and display its contents on screen
         window.display();

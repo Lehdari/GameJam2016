@@ -12,8 +12,8 @@ void ViewPort::setPosition(const Vector2Glf& position) {
 
 Matrix4Glf ViewPort::getMatrix(void) const {
     Matrix4Glf m;
-    m << 1.0f/width_, 0.0f, 0.0f, -position_(0)/width_,
-         0.0f, 1.0f/height_, 0.0f, -position_(1)/height_,
+    m << 2.0f/width_, 0.0f, 0.0f, (-position_(0)*2)/width_,
+         0.0f, 2.0f/height_, 0.0f, (-position_(1)*2)/height_,
          0.0f, 0.0f, 1.0f, 0.0f,
          0.0f, 0.0f, 0.0f, 1.0f;
 
