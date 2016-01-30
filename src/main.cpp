@@ -1,19 +1,27 @@
 #include <SFML/Graphics.hpp>
 #include <GL/glew.h>
+#include <memory>
 
+#include "QuadTree.hpp"
 #include "Renderer.hpp"
 #include "Shader.hpp"
 #include "ViewPort.hpp"
+#include "Character.hpp"
+#include "Platform.hpp"
+#include "EventQueue.hpp"
+#include "make_unique.hpp"
 
 
 int main(void) {
     // Declare and create a new window
-    sf::Window window(sf::VideoMode(1280, 720), "A Game");
+    sf::Window window(sf::VideoMode(1440, 900), "A Game");
     // Limit the framerate to 60 frames per second (this step is optional)
     window.setFramerateLimit(60);
 
     glewInit();
 
+    EventQueue eventQueue;
+    QuadTree quadTree(eventQueue, 2048);
     Renderer renderer(2048, 512);
 
     sf::Image img1;
@@ -25,6 +33,27 @@ int main(void) {
     Texture tex2;
     tex2.loadFromImage(img2);
 
+    std::vector<Platform> platforms_;
+    std::vector<std::unique_ptr<GameObject>> gameObjects_;
+
+    for (auto i=0u; i<10; ++i) {
+        platforms_.emplace_back(quadTree, renderer,
+                                Vector2Glf(i*32.0f, 0.0f), Vector2Glf(32.0f, 32.0f),
+                                tex1, Vector2Glf(0.25f, 0.25f));
+    }
+
+    sf::Image charImg;
+    charImg.loadFromFile("res/textures/testChar.png");
+    Texture charTex;
+    charTex.loadFromImage(charImg);
+
+    /*Character character(quadTree, renderer,
+                        Vector2Glf(64.0f, 256.0f), Vector2Glf(64.0f, 64.0f),
+                        charTex, Vector2Glf(1.0f, 1.0f);*/
+    gameObjects_.push_back(make_unique<Character>(quadTree, renderer,
+                        Vector2Glf(64.0f, 256.0f), Vector2Glf(64.0f, 64.0f),
+                        charTex, Vector2Glf(1.0f, 1.0f)));
+/*
     for (auto j=0; j<4; ++j) {
         for (auto i=0; i<10; ++i) {
             Sprite& spr = renderer.getSpriteReference();
@@ -40,11 +69,11 @@ int main(void) {
         spr.setScale({ 0.5f, 0.5f });
         spr.setPosition({ 128.0f*i, 0.0f });
     }
-
+*/
     Shader shader("shaders/VS_Sprite.glsl", "shaders/FS_Sprite.glsl");
 
-    ViewPort viewPort(1280.0f, 720.0f, Vector2Glf(0.0f, 0.0f));
-    viewPort.setPosition({ -640.0f, 0.0f });
+    ViewPort viewPort(1440.0f, 900.0f, Vector2Glf(0.0f, 0.0f));
+    viewPort.setPosition({ 512.0f, 0.0f });
 
     float t = 0.0f;
 
@@ -60,9 +89,13 @@ int main(void) {
         // Activate the window for OpenGL rendering
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
+        for (auto& o : gameObjects_) {
+            o->update();
+        }
+
         renderer.render(viewPort, shader);
 
-        viewPort.setPosition( {t*20, 0.0f} );
+        //viewPort.setPosition( {t*20, 0.0f} );
         //spr.setScale( { cos(t*PI*0.25)+1.5f, cos(t*PI*0.15)+1.5 } );
         //spr.setRotation(-t*PI*0.45);
 
