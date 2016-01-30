@@ -40,9 +40,11 @@ void Renderer::render(const ViewPort& viewPort, const Shader& shader) const {
     );
 
     for (auto& s : sprites_) {
-        shader.useShader(viewPort.getMatrix() * s.first.getMatrix());
-        glBindTexture(GL_TEXTURE_2D, s.first.textureId_);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        if (s.second) {
+            shader.useShader(viewPort.getMatrix() * s.first.getMatrix());
+            glBindTexture(GL_TEXTURE_2D, s.first.textureId_);
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+        }
     }
 
     glDisableVertexAttribArray(0);

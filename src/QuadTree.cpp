@@ -17,5 +17,9 @@ BoundingBox& QuadTree::getBoundingBoxReference(void) {
 }
 
 void QuadTree::checkCollisions(void) {
+    for (auto& b1 : boundingBoxes_) {
+        for (auto& b2 : boundingBoxes_) {
 
+        }
+    }
 }
