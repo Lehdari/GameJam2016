@@ -3,3 +3,7 @@
 
 EventQueue::EventQueue(void)
 {}
+
+void EventQueue::unsubscribeEvents(GameObject* gameObject) {
+
+}

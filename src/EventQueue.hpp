@@ -9,6 +9,8 @@ class EventQueue {
 public:
     EventQueue(void);
 
+    void unsubscribeEvents(GameObject* gameObject);
+
 private:
     //std::deque<Event> event_;
 };
