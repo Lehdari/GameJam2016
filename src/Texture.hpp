@@ -14,7 +14,7 @@ public:
     Texture(const Texture& other)             = delete;
     Texture(Texture&& other);
     Texture& operator=(const Texture& other)  = delete;
-    Texture& operator=(Texture&& other)       = delete;
+    Texture& operator=(Texture&& other);
 
     operator GLuint(void) const;
 

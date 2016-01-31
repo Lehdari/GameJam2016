@@ -30,6 +30,14 @@ Texture::Texture(Texture&& other) {
     other.textureId_ = 0;
 }
 
+Texture& Texture::operator=(Texture&& other) {
+    textureId_ = other.textureId_;
+    width_ = other.width_;
+    height_ = other.height_;
+
+    other.textureId_ = 0;
+}
+
 Texture::operator GLuint(void) const {
     return textureId_;
 }

@@ -9,5 +9,7 @@ uniform sampler2D texture;
 uniform float depth;
 
 void main() {
-    color = texture2D(texture, uv);
+    vec2 v = vec2(0.5)-uv;
+    float c = length(vec2(0.5)-uv);
+    color = texture2D(texture, uv-v*c*0.15);
 }

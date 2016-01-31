@@ -16,4 +16,3 @@ Platform::Platform(QuadTree& quadTree, Renderer& renderer,
     sprite_.setTexture(&texture);
     sprite_.setScale(spriteScale);
 }
-
