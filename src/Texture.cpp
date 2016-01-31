@@ -31,11 +31,16 @@ Texture::Texture(Texture&& other) {
 }
 
 Texture& Texture::operator=(Texture&& other) {
-    textureId_ = other.textureId_;
-    width_ = other.width_;
-    height_ = other.height_;
+	if (this != &other) {
+		glDeleteTextures(1, &textureId_);
+		textureId_ = other.textureId_;
+		width_ = other.width_;
+		height_ = other.height_;
 
-    other.textureId_ = 0;
+		other.textureId_ = 0;
+	}
+
+	return *this;
 }
 
 Texture::operator GLuint(void) const {
