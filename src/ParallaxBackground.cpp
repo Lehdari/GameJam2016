@@ -15,7 +15,7 @@ void ParallaxBackground::addLayer(const std::string& fileName, unsigned layer,
     img.loadFromFile(fileName);
 
     auto& spr = renderer_.getSpriteReference(layer);
-    layers_.push_back({Texture(), &spr, parallaxRatio, offset});
+    layers_.emplace_back(&spr, parallaxRatio, offset);
     layers_.back().texture.loadFromImage(img);
 
     spr.setTexture(&(layers_.back().texture));

@@ -27,6 +27,9 @@ private:
         float parallaxRatio;
         Vector2Glf offset;
 
+        Layer(Sprite* sprite, float parallaxRatio, const Vector2Glf& offset) :
+            texture(), sprite(sprite), parallaxRatio(parallaxRatio), offset(offset)
+        {}
     };
 
     Renderer& renderer_;
