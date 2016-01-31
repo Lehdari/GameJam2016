@@ -2,12 +2,19 @@
 #define EVENT_HPP
 
 class GameObject;
+class TriggerZone;
 
 struct Event {
-	enum Type { Collision } type;
+	enum Type { 
+	            Collision,
+	            Trigger,
+	            Transition, // ?
+	            None,
+	} type;
 
 	union {
 		struct { GameObject *a, *b; } collisionData;
+		struct { TriggerZone* zone; GameObject* object; bool exiting; } triggerData;
 	};
 };
 

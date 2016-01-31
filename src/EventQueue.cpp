@@ -1,6 +1,7 @@
 #include "EventQueue.hpp"
 
 #include "GameObject.hpp"
+#include "TriggerZone.hpp"
 #include <algorithm>
 
 void EventQueue::subscribeObject(GameObject* gameObject, Event::Type type) {
@@ -28,8 +29,21 @@ void EventQueue::dispenseEvents(size_t number) {
 		auto& event = events_.front();
 		auto& subscribers = subscriptions_[event.type];
 
+		// General subscriptions.
 		for (auto& subscriber : subscribers)
 			subscriber->putEvent(event);
+		
+		// Affected objects always get the event.
+		switch (event.type) {
+		case Event::Collision:
+			event.collisionData.a->putEvent(event);
+			event.collisionData.b->putEvent(event);
+			break;
+		case Event::Trigger:
+			event.triggerData.zone->putEvent(event);
+			event.triggerData.object->putEvent(event);
+			break;
+		}
 
 		events_.pop();
 	}
