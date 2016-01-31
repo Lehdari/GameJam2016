@@ -8,13 +8,5 @@ dep/
 *.depend
 *.cbTemp
 
-*.sln
-*.sdf
-*.opensdf
-*.suo
-*.vcxproj
-*.vcxproj.filters
-
-
 *.xcf
 *.zip
