@@ -97,6 +97,7 @@ void Renderer::render(const ViewPort& viewPort, const Shader& shader, float time
         }
 
         layerShader_.use();
+        layerShader_.setUniforms(Matrix4Glf::Identity(), 0.999f-(0.25f*layer++), time);
 
         glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, frameTexture_[activeFrame_], 0);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
