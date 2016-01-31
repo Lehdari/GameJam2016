@@ -20,6 +20,9 @@ public:
 private:
     Vector2Glf position_;
     Vector2Glf size_;
+
+	Vector2Glf bottomLeft_;
+	Vector2Glf topRight_;
 };
 
 

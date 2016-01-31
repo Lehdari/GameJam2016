@@ -1,11 +1,21 @@
 #ifndef EVENT_HPP
 #define EVENT_HPP
 
+class GameObject;
+class TriggerZone;
 
-class Event {
-public:
+struct Event {
+	enum Type { 
+	            Collision,
+	            Trigger,
+	            Transition, // ?
+	            None,
+	} type;
 
-private:
+	union {
+		struct { GameObject *a, *b; } collisionData;
+		struct { TriggerZone* zone; GameObject* object; bool exiting; } triggerData;
+	};
 };
 
 

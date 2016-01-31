@@ -2,8 +2,10 @@
 #define GAMEOBJECT_HPP
 
 
-#include "EventQueue.hpp"
+#include "Event.hpp"
+#include <queue>
 
+class EventQueue;
 
 class GameObject {
 public:
@@ -12,10 +14,12 @@ public:
 
     virtual void update(void) = 0;
 
-    void subscribeEvents(EventQueue* eventQueue/*, Event::Type type*/);
+	void subscribeToQueue(EventQueue&, Event::Type = Event::None);
+	void putEvent(Event event);
 
 private:
     EventQueue* eventQueue_;
+	std::queue<Event> receivedEvents_;
 };
 
 

@@ -7,20 +7,21 @@
 #include <vector>
 
 
-class EventQueue;
 
+class EventQueue;
+class GameObject;
 
 class QuadTree {
 public:
     QuadTree(EventQueue& eventQueue, unsigned nBoundingBoxes);
 
-    BoundingBox& getBoundingBoxReference(void);
+    BoundingBox& getBoundingBoxReference(GameObject*);
 
     void checkCollisions(void);
 
 private:
     EventQueue& eventQueue_;
-    std::vector<std::pair<BoundingBox, bool>> boundingBoxes_;
+    std::vector<std::pair<BoundingBox, GameObject*>> boundingBoxes_;
 };
 
 
