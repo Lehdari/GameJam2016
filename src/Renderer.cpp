@@ -57,7 +57,7 @@ Light& Renderer::getLightReference(void) {
     throw "Not enough light memory allocated in renderer";
 }
 
-void Renderer::render(const ViewPort& viewPort, const Shader& shader) {
+void Renderer::render(const ViewPort& viewPort, const Shader& shader, float time) {
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, quad__.vertexBufferId_);
 
@@ -125,7 +125,7 @@ void Renderer::render(const ViewPort& viewPort, const Shader& shader) {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, frameTexture_[!activeFrame_]);
 
-    quadShader_.setUniforms(Matrix4Glf::Identity(), -0.2f);
+    quadShader_.setUniforms(Matrix4Glf::Identity(), -0.2f, time);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
     glDisableVertexAttribArray(0);

@@ -108,8 +108,7 @@ int main(void) {
         viewPort.setPosition({2160.0f+1440.0f*cos(t*PI*0.1 + PI), 0.0f});
         bg.update(viewPort);
 
-        renderer.render(viewPort, shader);
-
+        renderer.render(viewPort, shader, t);
 
         window.display();
 

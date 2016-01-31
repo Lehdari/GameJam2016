@@ -22,7 +22,7 @@ public:
     Sprite& getSpriteReference(unsigned layer);
     Light&  getLightReference(void);
 
-    void render(const ViewPort& viewPort, const Shader& shader);
+    void render(const ViewPort& viewPort, const Shader& shader, float time);
 
 private:
     Quad quad__;

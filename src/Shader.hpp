@@ -15,12 +15,13 @@ public:
     GLuint getId(void) const;
     void use(void) const;
     void setUniforms(const Matrix4Glf& mvp,
-                     float depth = 0.0f) const;
+                     float depth = 0.0f, float time = 0.0f) const;
 
 private:
     GLuint programId_;
     GLuint uniformPosition_MVP_;
     GLuint uniformPosition_Depth_;
+    GLuint uniformPosition_Time_;
 };
 
 

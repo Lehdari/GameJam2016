@@ -83,6 +83,7 @@ Shader::Shader(const std::string& vsFileName, const std::string& fsFileName) {
 
     uniformPosition_MVP_ = glGetUniformLocation(programId_, "MVP");
     uniformPosition_Depth_ = glGetUniformLocation(programId_, "depth");
+    uniformPosition_Time_ = glGetUniformLocation(programId_, "time");
 }
 
 GLuint Shader::getId(void) const {
@@ -93,7 +94,8 @@ void Shader::use(void) const {
     glUseProgram(programId_);
 }
 
-void Shader::setUniforms(const Matrix4Glf& mvp, float depth) const {
+void Shader::setUniforms(const Matrix4Glf& mvp, float depth, float time) const {
     glUniformMatrix4fv(uniformPosition_MVP_, 1, GL_FALSE, mvp.data());
     glUniform1f(uniformPosition_Depth_, depth);
+    glUniform1f(uniformPosition_Time_, time);
 }
