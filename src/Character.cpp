@@ -6,7 +6,7 @@
 Character::Character(QuadTree& quadTree, Renderer& renderer,
                      const Vector2Glf& position, const Vector2Glf& size,
                      Texture& texture, const Vector2Glf& spriteScale) :
-    boundingBox_(quadTree.getBoundingBoxReference()),
+    boundingBox_(quadTree.getBoundingBoxReference(this)),
     sprite_(renderer.getSpriteReference()),
     state_(STATE_FALLING),
     gravitySpeed_(0.0f)
