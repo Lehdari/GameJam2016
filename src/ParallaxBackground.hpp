@@ -4,7 +4,7 @@
 
 #include "Sprite.hpp"
 
-#include <vector>
+#include <list>
 #include <string>
 
 
@@ -33,7 +33,7 @@ private:
     };
 
     Renderer& renderer_;
-    std::vector<Layer> layers_;
+    std::list<Layer> layers_;
 };
 
 

@@ -2,6 +2,7 @@ bin/
 obj/
 build/
 dep/
+res/
 
 *.cbp
 *.layout
