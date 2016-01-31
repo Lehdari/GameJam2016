@@ -10,6 +10,10 @@ void ViewPort::setPosition(const Vector2Glf& position) {
     position_ = position;
 }
 
+const Vector2Glf& ViewPort::getPosition(void) const {
+    return position_;
+}
+
 Matrix4Glf ViewPort::getMatrix(void) const {
     Matrix4Glf m;
     m << 2.0f/width_, 0.0f, 0.0f, (-position_(0)*2)/width_,

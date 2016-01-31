@@ -22,6 +22,14 @@ Texture::~Texture(void) {
         glDeleteTextures(1, &textureId_);
 }
 
+Texture::Texture(Texture&& other) {
+    textureId_ = other.textureId_;
+    width_ = other.width_;
+    height_ = other.height_;
+
+    other.textureId_ = 0;
+}
+
 Texture::operator GLuint(void) const {
     return textureId_;
 }

@@ -25,6 +25,7 @@ public:
 
     void setTexture(Texture* texture);
     void setType(Type type);
+    void setDepth(float depth);
     void setPosition(const Vector2Glf& position);
     void setScale(const Vector2Glf& scale);
     void setRotation(float rotation);
@@ -36,6 +37,7 @@ private:
     GLuint textureId_;
 
     Type type_;
+    float depth_;
     Vector2Glf position_;
     Vector2Glf scale_;
     float rotation_;

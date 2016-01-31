@@ -5,9 +5,10 @@
 
 Platform::Platform(QuadTree& quadTree, Renderer& renderer,
                    const Vector2Glf& position, const Vector2Glf& size,
-                   Texture& texture, const Vector2Glf& spriteScale) :
+                   Texture& texture, const Vector2Glf& spriteScale,
+                   unsigned layer) :
     boundingBox_(quadTree.getBoundingBoxReference()),
-    sprite_(renderer.getSpriteReference())
+    sprite_(renderer.getSpriteReference(layer))
 {
     boundingBox_.setPosition(position);
     boundingBox_.setSize(size);

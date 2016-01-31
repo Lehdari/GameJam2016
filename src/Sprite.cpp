@@ -6,7 +6,7 @@ Sprite::Sprite(Type type,
                const Vector2Glf& scale,
                float rotation) :
     texture_(nullptr), textureId_(0),
-    type_(type)
+    type_(type), depth_(0.0f)
 {
     setPosition(position);
     setScale(scale);
@@ -15,6 +15,10 @@ Sprite::Sprite(Type type,
 
 void Sprite::setType(Type type) {
     type_ = type;
+}
+
+void Sprite::setDepth(float depth) {
+    depth_ = depth;
 }
 
 void Sprite::setTexture(Texture* texture) {
@@ -35,8 +39,8 @@ void Sprite::setPosition(const Vector2Glf& position) {
 void Sprite::setScale(const Vector2Glf& scale) {
     scale_ = scale;
     if (texture_) {
-        scaleMatrix_ <<     texture_->width()*scale_(0),    0.0f,   0.0f,   0.0f,
-                            0.0f,   texture_->height()*scale_(1),   0.0f,   0.0f,
+        scaleMatrix_ <<     texture_->width()*scale_(0)*0.5,    0.0f,   0.0f,   0.0f,
+                            0.0f,   texture_->height()*scale_(1)*0.5,   0.0f,   0.0f,
                             0.0f,   0.0f,   1.0f,   0.0f,
                             0.0f,   0.0f,   0.0f,   1.0f;
     }

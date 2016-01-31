@@ -7,27 +7,34 @@
 #include "Quad.hpp"
 #include "Shader.hpp"
 #include "ViewPort.hpp"
+#include "Framebuffer.hpp"
 
 #include <vector>
 
 
 class Renderer {
 public:
-    Renderer(unsigned nSprites, unsigned nLights);
+    Renderer(std::vector<unsigned> nSprites, unsigned nLights,
+             unsigned width, unsigned height);
+    ~Renderer(void);
 
     //  finds next free sprite slot
-    Sprite& getSpriteReference(void);
+    Sprite& getSpriteReference(unsigned layer);
     Light&  getLightReference(void);
 
-    void render(const ViewPort& viewPort, const Shader& shader) const;
+    void render(const ViewPort& viewPort, const Shader& shader);
 
 private:
     Quad quad__;
+    Framebuffer framebuffer_;
+    Texture frameTexture_[3];
+    int activeFrame_;
+    GLuint depthRenderbuffer_;
+    Shader layerShader_;
+    Shader quadShader_;
 
-    std::vector<std::pair<Sprite, bool>> sprites_;
+    std::vector<std::vector<std::pair<Sprite, bool>>> sprites_;
     std::vector<std::pair<Light, bool>> lights_;
-
-    GLuint uniformLoc_Texture_;
 };
 
 

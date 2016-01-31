@@ -5,6 +5,9 @@
 #include <deque>
 
 
+class GameObject;
+
+
 class EventQueue {
 public:
     EventQueue(void);

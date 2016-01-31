@@ -13,13 +13,14 @@ public:
     Shader(const std::string& vsFileName, const std::string& fsFileName);
 
     GLuint getId(void) const;
-    void useShader(const Matrix4Glf& mvp,
-                   const Vector3Glf& color = Vector3Glf(1.0f, 1.0f, 1.0f)) const;
+    void use(void) const;
+    void setUniforms(const Matrix4Glf& mvp,
+                     float depth = 0.0f) const;
 
 private:
     GLuint programId_;
     GLuint uniformPosition_MVP_;
-    GLuint uniformPosition_Color_;
+    GLuint uniformPosition_Depth_;
 };
 
 

@@ -11,6 +11,7 @@ public:
              const Vector2Glf& position);
 
     void setPosition(const Vector2Glf& position);
+    const Vector2Glf& getPosition(void) const;
 
     Matrix4Glf getMatrix(void) const;
 

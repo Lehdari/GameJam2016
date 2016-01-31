@@ -21,7 +21,8 @@ public:
 
     Character(QuadTree& quadTree, Renderer& renderer,
               const Vector2Glf& position, const Vector2Glf& size,
-              Texture& texture, const Vector2Glf& spriteScale);
+              Texture& texture, const Vector2Glf& spriteScale,
+              unsigned layer);
 
     void update(void);
 
